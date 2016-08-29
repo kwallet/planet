@@ -15,20 +15,18 @@ use_frameworks!
 pod 'Planet'
 ```
 
-To get the full benefits import `Planet` wherever you import UIKit
-
-``` swift
-import UIKit
-import Planet
-```
-
 #### Manually
 1. Download and drop ```/Planet```folder in your project.  
 2. Congratulations!
 
 ## Example
 
-Create the view controller:
+First, import the library:
+``` swift
+ import Planet
+```
+
+Then, the View Controller:
 
 ```swift
 let viewController = CountryPickerViewController()

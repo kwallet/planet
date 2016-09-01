@@ -26,7 +26,7 @@ First, import the library:
  import Planet
 ```
 
-Then, the View Controller:
+Then, create the view controller:
 
 ```swift
 let viewController = CountryPickerViewController()

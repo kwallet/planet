@@ -6,11 +6,27 @@ A country picker view controller for iOS.
 
 ## Installation
 
-Just drag the `Planet` folder to your project or add `pod 'Planet'` to your `Podfile`.
+#### CocoaPods
+You can use [CocoaPods](http://cocoapods.org/) to install `Planet` by adding it to your `Podfile`:
+
+```ruby
+platform :ios, '8.0'
+use_frameworks!
+pod 'Planet'
+```
+
+#### Manually
+1. Download and drop ```/Planet```folder in your project.  
+2. Congratulations!
 
 ## Example
 
-Create the view controller:
+First, import the library:
+``` swift
+ import Planet
+```
+
+Then, create the view controller:
 
 ```swift
 let viewController = CountryPickerViewController()

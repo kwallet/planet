@@ -49,7 +49,7 @@ open class CountryPickerViewController: UITableViewController {
 
 // MARK: UIViewController
 
-public extension CountryPickerViewController {
+extension CountryPickerViewController {
     
     override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -72,7 +72,7 @@ public extension CountryPickerViewController {
 
 // MARK: UITableViewDelegate, UITableViewDataSource
 
-public extension CountryPickerViewController {
+extension CountryPickerViewController {
     override open func numberOfSections(in tableView: UITableView) -> Int {
         if let _ = searchResults {
             return 1
@@ -115,8 +115,6 @@ public extension CountryPickerViewController {
     override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.countryPickerViewController(self, didSelectCountry: findCountry(indexPath))
     }
-    
-    
 }
 
 // MARK: UISearchResultsUpdating

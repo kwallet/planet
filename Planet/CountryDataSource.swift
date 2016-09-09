@@ -13,7 +13,7 @@ class CountryDataSource {
     
     fileprivate let countries: [[Country]]
     
-    init(locale: Locale = .current()) {
+    init(locale: Locale = .current) {
         let countryCodes = Locale.isoRegionCodes
         
         let dataAsset = NSDataAsset(name: "country-calling-codes", bundle: .planetBundle())!
@@ -61,8 +61,8 @@ class CountryDataSource {
     }
     
     func find(_ text: String) -> [Country] {
-        return countries.flatten()
-            .filter { $0.name.localizedCaseInsensitiveContainsString(text) }
+        return countries.joined()
+            .filter { $0.name.localizedCaseInsensitiveContains(text) }
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
 }

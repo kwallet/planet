@@ -12,7 +12,7 @@ import XCTest
 class PlanetTests: XCTestCase {
     
     func testFindingAustria() {
-        let locale = NSLocale(localeIdentifier: "de_AT")
+        let locale = Locale(identifier: "de_AT")
         let dataSource = CountryDataSource(locale: locale)
         
         let country = dataSource.find("Österreich").first
@@ -23,7 +23,7 @@ class PlanetTests: XCTestCase {
     }
     
     func testFindingGermany() {
-        let locale = NSLocale(localeIdentifier: "de_AT")
+        let locale = Locale(identifier: "de_AT")
         let dataSource = CountryDataSource(locale: locale)
         
         let country = dataSource.find("Schland").first
@@ -34,7 +34,7 @@ class PlanetTests: XCTestCase {
     }
     
     func testFindingAustriaInEnglish() {
-        let locale = NSLocale(localeIdentifier: "en_US")
+        let locale = Locale(identifier: "en_US")
         let dataSource = CountryDataSource(locale: locale)
         
         let country = dataSource.find("Austria").first

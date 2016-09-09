@@ -11,21 +11,21 @@ import Foundation
 class CountryDataSource {
     let currentCountry: Country?
     
-    private let countries: [[Country]]
+    fileprivate let countries: [[Country]]
     
-    init(locale: NSLocale = .currentLocale()) {
-        let countryCodes = NSLocale.ISOCountryCodes()
+    init(locale: Locale = .current()) {
+        let countryCodes = Locale.isoRegionCodes
         
         let dataAsset = NSDataAsset(name: "country-calling-codes", bundle: .planetBundle())!
-        let callingCodes = (try? NSJSONSerialization.JSONObjectWithData(dataAsset.data, options: [])) as! [String: String]
+        let callingCodes = (try? JSONSerialization.jsonObject(with: dataAsset.data, options: [])) as! [String: String]
         
         var currentCountries: [Country] = []
         var otherCountries: [Country] = []
         
-        let currentCountryCode = locale.objectForKey(NSLocaleCountryCode) as! String
+        let currentCountryCode = (locale as NSLocale).object(forKey: NSLocale.Key.countryCode) as! String
         
         for countryCode in countryCodes {
-            guard let countryName = locale.displayNameForKey(NSLocaleCountryCode, value: countryCode) else {
+            guard let countryName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode) else {
                 continue
             }
             
@@ -42,7 +42,7 @@ class CountryDataSource {
             }
         }
         
-        otherCountries.sortInPlace { $0.name.localizedCaseInsensitiveCompare($1.name) == .OrderedAscending }
+        otherCountries.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
         
         currentCountry = currentCountries.first
         countries = [currentCountries, otherCountries]
@@ -52,17 +52,17 @@ class CountryDataSource {
         return countries.count
     }
     
-    func count(section: Int) -> Int {
+    func count(_ section: Int) -> Int {
         return countries[section].count
     }
     
-    func find(indexPath: NSIndexPath) -> Country {
-        return countries[indexPath.section][indexPath.row]
+    func find(_ indexPath: IndexPath) -> Country {
+        return countries[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
     }
     
-    func find(text: String) -> [Country] {
+    func find(_ text: String) -> [Country] {
         return countries.flatten()
             .filter { $0.name.localizedCaseInsensitiveContainsString(text) }
-            .sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .OrderedAscending }
+            .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
 }

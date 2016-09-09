@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension NSBundle {
-    class func planetBundle() -> NSBundle {
-        return NSBundle(forClass: CountryPickerViewController.self)
+extension Bundle {
+    class func planetBundle() -> Bundle {
+        return Bundle(for: CountryPickerViewController.self)
     }
 }

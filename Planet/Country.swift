@@ -17,8 +17,8 @@ public struct Country {
 public extension Country {
     var image: UIImage? {
         let imageName = isoCode
-        let bundle = NSBundle.planetBundle()
+        let bundle = Bundle.planetBundle()
         
-        return UIImage(named: imageName, inBundle: bundle, compatibleWithTraitCollection: nil)
+        return UIImage(named: imageName, in: bundle, compatibleWith: nil)
     }
 }

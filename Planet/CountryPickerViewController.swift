@@ -8,40 +8,40 @@
 
 import UIKit
 
-public class CountryPickerViewController: UITableViewController {
-    weak public var delegate: CountryPickerViewControllerDelegate?
+open class CountryPickerViewController: UITableViewController {
+    weak open var delegate: CountryPickerViewControllerDelegate?
     
-    public var currentCountry: Country? {
+    open var currentCountry: Country? {
         return countryDataSource.currentCountry
     }
     
-    public var showsCallingCodes = true
+    open var showsCallingCodes = true
     
-    public var showsCancelButton = true
+    open var showsCancelButton = true
     
-    private var countryDataSource = CountryDataSource()
+    fileprivate var countryDataSource = CountryDataSource()
     
-    private var searchResults: [Country]?
-    private let searchController = UISearchController(searchResultsController: nil)
+    fileprivate var searchResults: [Country]?
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
     
-    private func findCountry(indexPath: NSIndexPath) -> Country {
+    fileprivate func findCountry(_ indexPath: IndexPath) -> Country {
         if let searchResults = searchResults {
-            return searchResults[indexPath.row]
+            return searchResults[(indexPath as NSIndexPath).row]
         } else {
             return countryDataSource.find(indexPath)
         }
     }
     
-    private dynamic func cancelButtonTapped(sender: UIBarButtonItem) {
+    fileprivate dynamic func cancelButtonTapped(_ sender: UIBarButtonItem) {
         delegate?.countryPickerViewControllerDidCancel(self)
     }
     
-    private func tableFooterView() -> UIView {
+    fileprivate func tableFooterView() -> UIView {
         let tableFooterView = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 44.0))
         tableFooterView.text = NSLocalizedString("Icons by emojione.com", comment: "Icons by emojione.com")
-        tableFooterView.textAlignment = .Center
+        tableFooterView.textAlignment = .center
         tableFooterView.textColor = UIColor(white: 0.500, alpha: 1.0)
-        tableFooterView.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
+        tableFooterView.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         
         return tableFooterView
     }
@@ -51,12 +51,12 @@ public class CountryPickerViewController: UITableViewController {
 
 public extension CountryPickerViewController {
     
-    override func viewWillAppear(animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         if showsCancelButton {
             let action = #selector(cancelButtonTapped)
-            let leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: action)
+            let leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: action)
             navigationItem.leftBarButtonItem = leftBarButtonItem
         }
         
@@ -73,7 +73,7 @@ public extension CountryPickerViewController {
 // MARK: UITableViewDelegate, UITableViewDataSource
 
 public extension CountryPickerViewController {
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override open func numberOfSections(in tableView: UITableView) -> Int {
         if let _ = searchResults {
             return 1
         } else {
@@ -81,7 +81,7 @@ public extension CountryPickerViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let searchResults = searchResults {
             return searchResults.count
         } else {
@@ -89,12 +89,12 @@ public extension CountryPickerViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let style: UITableViewCellStyle = showsCallingCodes ? .Subtitle : .Default
+        let style: UITableViewCellStyle = showsCallingCodes ? .subtitle : .default
         let identifier = showsCallingCodes ? "SubtitleCell" : "DefaultCell"
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier)
             ?? UITableViewCell(style: style, reuseIdentifier: identifier)
         
         let country = findCountry(indexPath)
@@ -112,7 +112,7 @@ public extension CountryPickerViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.countryPickerViewController(self, didSelectCountry: findCountry(indexPath))
     }
     
@@ -122,8 +122,8 @@ public extension CountryPickerViewController {
 // MARK: UISearchResultsUpdating
 
 extension CountryPickerViewController: UISearchResultsUpdating {
-    public func updateSearchResultsForSearchController(searchController: UISearchController) {
-        if let text = searchController.searchBar.text where !text.isEmpty {
+    public func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text , !text.isEmpty {
             searchResults = countryDataSource.find(text)
         } else {
             searchResults = nil

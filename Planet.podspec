@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.author       = {'Mikael Konutgan' => 'mikael@k-wallet.com'}
 
-  s.source       = {git: 'https://github.com/kwallet/planet', tag: s.version}
+  s.source       = {git: 'https://github.com/kwallet/planet.git', tag: s.version}
 
   s.platform     = :ios, '9.3'
 

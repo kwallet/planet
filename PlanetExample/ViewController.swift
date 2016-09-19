@@ -11,27 +11,27 @@ import Planet
 
 class ViewController: UIViewController {
     
-    @IBAction func buttonTapped(sender: UIButton) {
+    @IBAction func buttonTapped(_ sender: UIButton) {
         let viewController = CountryPickerViewController()
         viewController.delegate = self
         
         print("The current country is \(viewController.currentCountry)")
         
         let navigationController = UINavigationController(rootViewController: viewController)
-        presentViewController(navigationController, animated: true, completion: nil)
+        present(navigationController, animated: true, completion: nil)
     }
 }
 
 extension ViewController: CountryPickerViewControllerDelegate {
-    func countryPickerViewControllerDidCancel(countryPickerViewController: CountryPickerViewController) {
+    func countryPickerViewControllerDidCancel(_ countryPickerViewController: CountryPickerViewController) {
         print("countryPickerViewControllerDidCancel: \(countryPickerViewController)")
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    func countryPickerViewController(countryPickerViewController: CountryPickerViewController, didSelectCountry country: Country) {
+    func countryPickerViewController(_ countryPickerViewController: CountryPickerViewController, didSelectCountry country: Country) {
         print("countryPickerViewController: \(countryPickerViewController) didSelectCountry: \(country)")
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }

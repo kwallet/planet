@@ -8,16 +8,16 @@
 
 import UIKit
 
-open class CountryPickerViewController: UITableViewController {
-    weak open var delegate: CountryPickerViewControllerDelegate?
+public class CountryPickerViewController: UITableViewController {
+    public weak var delegate: CountryPickerViewControllerDelegate?
     
-    open var currentCountry: Country? {
+    public var currentCountry: Country? {
         return countryDataSource.currentCountry
     }
     
-    open var showsCallingCodes = true
+    public var showsCallingCodes = true
     
-    open var showsCancelButton = true
+    public var showsCancelButton = true
     
     fileprivate var countryDataSource = CountryDataSource()
     
@@ -49,9 +49,9 @@ open class CountryPickerViewController: UITableViewController {
 
 // MARK: UIViewController
 
-extension CountryPickerViewController {
+public extension CountryPickerViewController {
     
-    override open func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         if showsCancelButton {
@@ -72,8 +72,8 @@ extension CountryPickerViewController {
 
 // MARK: UITableViewDelegate, UITableViewDataSource
 
-extension CountryPickerViewController {
-    override open func numberOfSections(in tableView: UITableView) -> Int {
+public extension CountryPickerViewController {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         if let _ = searchResults {
             return 1
         } else {
@@ -81,7 +81,7 @@ extension CountryPickerViewController {
         }
     }
     
-    override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let searchResults = searchResults {
             return searchResults.count
         } else {
@@ -89,7 +89,7 @@ extension CountryPickerViewController {
         }
     }
     
-    override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let style: UITableViewCellStyle = showsCallingCodes ? .subtitle : .default
         let identifier = showsCallingCodes ? "SubtitleCell" : "DefaultCell"
@@ -112,7 +112,7 @@ extension CountryPickerViewController {
         return cell
     }
     
-    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.countryPickerViewController(self, didSelectCountry: findCountry(indexPath))
     }
 }

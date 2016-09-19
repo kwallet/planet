@@ -11,7 +11,7 @@ import Foundation
 class CountryDataSource {
     let currentCountry: Country?
     
-    fileprivate let countries: [[Country]]
+    private let countries: [[Country]]
     
     init(locale: Locale = .current) {
         let countryCodes = Locale.isoRegionCodes

@@ -43,4 +43,25 @@ class PlanetTests: XCTestCase {
         XCTAssertEqual(country?.isoCode, "AT")
         XCTAssertEqual(country?.callingCode, "+43")
     }
+
+    func testUnfilteredCountryCount() {
+        let locale = Locale(identifier: "de_AT")
+        let dataSource = CountryDataSource(locale: locale)
+
+        let dataAsset = NSDataAsset(name: "country-calling-codes", bundle: .planetBundle())!
+        let callingCodes = (try? JSONSerialization.jsonObject(with: dataAsset.data, options: [])) as! [String: String]
+
+
+        XCTAssertEqual(dataSource.count(0), 1) // current locale
+        XCTAssertEqual(dataSource.count(1), callingCodes.count - 1) // the rest
+    }
+
+    func testFilterCountryCount() {
+        let filterArray = ["AT", "DE", "US"]
+        let locale = Locale(identifier: "en_GB")
+        let dataSource = CountryDataSource(locale: locale, filteredISOCodes: filterArray)
+
+        XCTAssertEqual(dataSource.count(0), 0) // current locale - not in filterArray
+        XCTAssertEqual(dataSource.count(1), 3) // the rest
+    }
 }

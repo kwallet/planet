@@ -20,7 +20,13 @@ public class CountryPickerViewController: UITableViewController {
     public var showsCancelButton = true
     
     fileprivate var countryDataSource = CountryDataSource()
-    
+
+    public var filteredISOCodes: [String] = [] {
+        didSet {
+            countryDataSource = CountryDataSource(locale: .current, filteredISOCodes: filteredISOCodes)
+        }
+    }
+
     fileprivate var searchResults: [Country]?
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     

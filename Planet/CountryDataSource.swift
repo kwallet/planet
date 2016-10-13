@@ -13,7 +13,7 @@ class CountryDataSource {
     
     private let countries: [[Country]]
     
-    init(locale: Locale = .current) {
+    init(locale: Locale = .current, filteredISOCodes: [String] = []) {
         let countryCodes = Locale.isoRegionCodes
         
         let dataAsset = NSDataAsset(name: "country-calling-codes", bundle: .planetBundle())!
@@ -25,6 +25,11 @@ class CountryDataSource {
         let currentCountryCode = (locale as NSLocale).object(forKey: NSLocale.Key.countryCode) as! String
         
         for countryCode in countryCodes {
+            if filteredISOCodes.count > 0 {
+                guard filteredISOCodes.contains(countryCode) else {
+                    continue
+                }
+            }
             guard let countryName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode) else {
                 continue
             }

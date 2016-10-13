@@ -16,7 +16,10 @@ class ViewController: UIViewController {
         viewController.delegate = self
         
         print("The current country is \(viewController.currentCountry)")
-        
+
+        // uncomment the next line to filter for iso codes
+//        viewController.filteredISOCodes = ["DE", "US", "IN"]
+
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true, completion: nil)
     }

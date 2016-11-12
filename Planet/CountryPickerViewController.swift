@@ -121,6 +121,10 @@ public extension CountryPickerViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.countryPickerViewController(self, didSelectCountry: findCountry(indexPath))
     }
+
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+      delegate?.countryPickerViewController(self, didUnselectCountry: findCountry(indexPath))
+    }
 }
 
 // MARK: UISearchResultsUpdating

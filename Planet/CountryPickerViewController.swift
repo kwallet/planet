@@ -20,7 +20,13 @@ public class CountryPickerViewController: UITableViewController {
     public var showsCancelButton = true
     
     fileprivate var countryDataSource = CountryDataSource()
-    
+
+    public var filteredISOCodes: [String] = [] {
+        didSet {
+            countryDataSource = CountryDataSource(locale: .current, filteredISOCodes: filteredISOCodes)
+        }
+    }
+
     fileprivate var searchResults: [Country]?
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     
@@ -114,6 +120,10 @@ public extension CountryPickerViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.countryPickerViewController(self, didSelectCountry: findCountry(indexPath))
+    }
+
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+      delegate?.countryPickerViewController(self, didUnselectCountry: findCountry(indexPath))
     }
 }
 

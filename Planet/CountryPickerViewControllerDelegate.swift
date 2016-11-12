@@ -11,4 +11,5 @@ import Foundation
 public protocol CountryPickerViewControllerDelegate: NSObjectProtocol {
     func countryPickerViewControllerDidCancel(_ countryPickerViewController: CountryPickerViewController)
     func countryPickerViewController(_ countryPickerViewController: CountryPickerViewController, didSelectCountry country: Country)
+    func countryPickerViewController(_ countryPickerViewController: CountryPickerViewController, didUnselectCountry country: Country)
 }

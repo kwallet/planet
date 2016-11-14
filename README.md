@@ -10,19 +10,19 @@ A country picker view controller for iOS.
 You can use [CocoaPods](http://cocoapods.org/) to install `Planet` by adding it to your `Podfile`:
 
 ```ruby
-platform :ios, '8.0'
+platform :ios, '10.0'
 use_frameworks!
 pod 'Planet'
 ```
 
 #### Manually
-1. Download and drop ```/Planet```folder in your project.  
+1. Download and drop `/Planet` folder in your project.  
 2. Congratulations!
 
 ## Example
 
 First, import the library:
-``` swift
+```swift
  import Planet
 ```
 
@@ -43,6 +43,7 @@ func countryPickerViewController(countryPickerViewController: CountryPickerViewC
 
 - You can hide the calling codes by toggling `showsCallingCodes`.
 - And you can remove the cancel button, for example if you want to present the view controller by pushing it or in a popover by setting `showsCancelButton` to `false`.
+- You can show a custom list of countries instead of all countries by supplying a list of ISO codes in the `countryCodes` property. See the comment in the example project
 
 ## Contributing
 

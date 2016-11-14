@@ -43,4 +43,19 @@ class PlanetTests: XCTestCase {
         XCTAssertEqual(country?.isoCode, "AT")
         XCTAssertEqual(country?.callingCode, "+43")
     }
+    
+    func testDataSourceWithCustomCountryCodes() {
+        let locale = Locale(identifier: "en_US")
+        let dataSource = CountryDataSource(locale: locale, countryCodes: ["AT", "DE", "CH"])
+        
+        XCTAssertEqual(dataSource.count(1), 3)
+        
+        let includedCountry = dataSource.find("Austria").first
+        
+        XCTAssertEqual(includedCountry?.isoCode, "AT")
+        
+        let notIncludedCountry = dataSource.find("UNited States").first
+        
+        XCTAssertNil(notIncludedCountry)
+    }
 }

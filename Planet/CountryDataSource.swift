@@ -13,8 +13,12 @@ class CountryDataSource {
     
     private let countries: [[Country]]
     
-    init(locale: Locale = .current) {
-        let countryCodes = Locale.isoRegionCodes
+    let locale: Locale
+    let countryCodes: [String]
+    
+    init(locale: Locale = .current, countryCodes: [String] = Locale.isoRegionCodes) {
+        self.locale = locale
+        self.countryCodes = countryCodes
         
         let dataAsset = NSDataAsset(name: "country-calling-codes", bundle: .planetBundle())!
         let callingCodes = (try? JSONSerialization.jsonObject(with: dataAsset.data, options: [])) as! [String: String]

@@ -19,6 +19,28 @@ public class CountryPickerViewController: UITableViewController {
     
     public var showsCancelButton = true
     
+    public var locale: Locale {
+        get {
+            return countryDataSource.locale
+        }
+        
+        set(newLocale) {
+            countryDataSource = CountryDataSource(locale: newLocale, countryCodes: countryCodes)
+            tableView.reloadData()
+        }
+    }
+    
+    public var countryCodes: [String] {
+        get {
+            return countryDataSource.countryCodes
+        }
+        
+        set(newCountryCodes) {
+            countryDataSource = CountryDataSource(locale: locale, countryCodes: newCountryCodes)
+            tableView.reloadData()
+        }
+    }
+    
     fileprivate var countryDataSource = CountryDataSource()
     
     fileprivate var searchResults: [Country]?

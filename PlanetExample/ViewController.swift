@@ -17,6 +17,9 @@ class ViewController: UIViewController {
         
         print("The current country is \(viewController.currentCountry)")
         
+        // Try out showning a custom list of country codes by uncommenting the following line:
+        // viewController.countryCodes = ["US", "IN"]
+        
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true, completion: nil)
     }

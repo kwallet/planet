@@ -69,4 +69,16 @@ class CountryDataSource {
             .filter { $0.name.localizedCaseInsensitiveContains(text) }
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
+    
+    func find(isoCode: String) -> Country? {
+        return countries.joined()
+            .filter { $0.isoCode == isoCode }
+            .first
+    }
+    
+    func find(callingCode: String) -> Country? {
+        return countries.joined()
+            .filter { $0.callingCode == callingCode }
+            .first
+    }
 }

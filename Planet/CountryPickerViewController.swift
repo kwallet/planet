@@ -67,6 +67,14 @@ public class CountryPickerViewController: UITableViewController {
         
         return tableFooterView
     }
+    
+    public func getCountry(isoCode: String) -> Country? {
+        return countryDataSource.find(isoCode: isoCode)
+    }
+    
+    public func getCountry(callingCode: String) -> Country? {
+        return countryDataSource.find(callingCode: callingCode)
+    }
 }
 
 // MARK: UIViewController

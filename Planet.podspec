@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.source       = {git: 'https://github.com/kwallet/planet.git', tag: s.version}
 
-  s.platform     = :ios, ‘9.0’
+  s.platform     = :ios, ‘10.0’
 
   s.source_files  = "Planet", 'Classes/**/*.{h,m,swift}'
   s.resources = 'Planet/Planet.xcassets'

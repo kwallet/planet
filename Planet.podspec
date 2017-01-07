@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Planet'
-  s.version      = '0.2.0'
+  s.version      = '0.2.1'
   s.summary      = 'A country picker'
   s.description  = 'A country picker view controller'
   s.homepage     = 'https://github.com/kwallet/planet'
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.source       = {git: 'https://github.com/kwallet/planet.git', tag: s.version}
 
-  s.platform     = :ios, ‘10.0’
+  s.platform     = :ios, '9.0'
 
   s.source_files  = "Planet", 'Classes/**/*.{h,m,swift}'
   s.resources = 'Planet/Planet.xcassets'

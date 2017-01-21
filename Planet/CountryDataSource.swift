@@ -19,7 +19,6 @@ class CountryDataSource {
     init(locale: Locale = .current, countryCodes: [String] = Locale.isoRegionCodes) {
         self.locale = locale
         self.countryCodes = countryCodes
-        Country.locale = locale
         
         var currentCountries: [Country] = []
         var otherCountries: [Country] = []
@@ -27,12 +26,11 @@ class CountryDataSource {
         let currentCountryCode = (locale as NSLocale).object(forKey: NSLocale.Key.countryCode) as! String
         
         for countryCode in countryCodes {
-            let country = Country.countries.filter{$0.isoCode == countryCode}.first
-            if country != nil {
-                if country!.isoCode == currentCountryCode {
-                    currentCountries.append(country!)
+            if let country = Country.find(isoCode: countryCode, locale: locale) {
+                if country.isoCode == currentCountryCode {
+                    currentCountries.append(country)
                 } else {
-                    otherCountries.append(country!)
+                    otherCountries.append(country)
                 }
             }
         }
@@ -52,7 +50,7 @@ class CountryDataSource {
     }
     
     func find(_ indexPath: IndexPath) -> Country {
-        return countries[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+        return countries[indexPath.section][indexPath.row]
     }
     
     func find(_ text: String) -> [Country] {

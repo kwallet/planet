@@ -15,25 +15,31 @@ public struct Country {
 }
 
 public extension Country {
-    
-    public static var locale: Locale = .current
-    
     var image: UIImage? {
         let imageName = isoCode
         let bundle = Bundle.planetBundle()
-        
         return UIImage(named: imageName, in: bundle, compatibleWith: nil)
     }
+}
+
+extension Country {
+    private static var localizedCountries: [Locale : [Country]] = [:]
+    private static var callingCodes: [String: String] = [:]
     
-    public static var countries: [Country] = {
+    public static func all(locale: Locale = .current) -> [Country] {
+        if let countries = localizedCountries[locale] {
+            return countries
+        }
         
-        let dataAsset = NSDataAsset(name: "country-calling-codes", bundle: .planetBundle())!
-        let callingCodes = (try? JSONSerialization.jsonObject(with: dataAsset.data, options: [])) as! [String: String]
+        if callingCodes.isEmpty {
+            let dataAsset = NSDataAsset(name: "country-calling-codes", bundle: .planetBundle())!
+            callingCodes = (try? JSONSerialization.jsonObject(with: dataAsset.data, options: [])) as! [String: String]
+        }
         
         var countries: [Country] = []
         
         for countryCode in Locale.isoRegionCodes {
-            guard let countryName = (Country.locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode) else {
+            guard let countryName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode) else {
                 continue
             }
             
@@ -47,18 +53,17 @@ public extension Country {
         }
         
         countries.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+        
+        localizedCountries[locale] = countries
+        
         return countries
-    }()
-    
-    public static func find(isoCode: String) -> Country? {
-        return Country.countries
-            .filter { $0.isoCode == isoCode }
-            .first
     }
     
-    public static func find(callingCode: String) -> Country? {
-        return Country.countries
-            .filter { $0.callingCode == callingCode }
-            .first
+    public static func find(isoCode: String, locale: Locale = .current) -> Country? {
+        return all(locale: locale).filter { $0.isoCode == isoCode } .first
+    }
+    
+    public static func find(callingCode: String, locale: Locale = .current) -> Country? {
+        return all(locale: locale).filter { $0.callingCode == callingCode } .first
     }
 }

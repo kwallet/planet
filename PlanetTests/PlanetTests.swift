@@ -15,8 +15,8 @@ class PlanetTests: XCTestCase {
         let locale = Locale(identifier: "de_AT")
         let dataSource = CountryDataSource(locale: locale)
         
-        let country = dataSource.find("Österreich").first
-
+        let country = dataSource.find("Österre").first
+        
         XCTAssertEqual(country?.name, "Österreich")
         XCTAssertEqual(country?.isoCode, "AT")
         XCTAssertEqual(country?.callingCode, "+43")
@@ -54,7 +54,7 @@ class PlanetTests: XCTestCase {
         
         XCTAssertEqual(includedCountry?.isoCode, "AT")
         
-        let notIncludedCountry = dataSource.find("UNited States").first
+        let notIncludedCountry = dataSource.find("United States").first
         
         XCTAssertNil(notIncludedCountry)
     }

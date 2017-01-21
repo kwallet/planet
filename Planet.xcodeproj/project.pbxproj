@@ -23,6 +23,7 @@
 		64585C751D3912FA00D836C4 /* NSBundle+Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64585C741D3912FA00D836C4 /* NSBundle+Planet.swift */; };
 		64585C771D39147500D836C4 /* Planet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64585C2D1D37EECD00D836C4 /* Planet.framework */; };
 		64585C781D39147500D836C4 /* Planet.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 64585C2D1D37EECD00D836C4 /* Planet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		64A4EBB61E34170700C8D00A /* CountryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A4EBB51E34170700C8D00A /* CountryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		64585C6E1D39103A00D836C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64585C701D39103A00D836C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64585C741D3912FA00D836C4 /* NSBundle+Planet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+Planet.swift"; sourceTree = "<group>"; };
+		64A4EBB51E34170700C8D00A /* CountryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				64585C3C1D37EECD00D836C4 /* PlanetTests.swift */,
+				64A4EBB51E34170700C8D00A /* CountryTests.swift */,
 				64585C3E1D37EECD00D836C4 /* Info.plist */,
 			);
 			path = PlanetTests;
@@ -329,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64A4EBB61E34170700C8D00A /* CountryTests.swift in Sources */,
 				64585C3D1D37EECD00D836C4 /* PlanetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

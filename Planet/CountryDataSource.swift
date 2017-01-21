@@ -20,29 +20,18 @@ class CountryDataSource {
         self.locale = locale
         self.countryCodes = countryCodes
         
-        let dataAsset = NSDataAsset(name: "country-calling-codes", bundle: .planetBundle())!
-        let callingCodes = (try? JSONSerialization.jsonObject(with: dataAsset.data, options: [])) as! [String: String]
-        
         var currentCountries: [Country] = []
         var otherCountries: [Country] = []
         
         let currentCountryCode = (locale as NSLocale).object(forKey: NSLocale.Key.countryCode) as! String
         
         for countryCode in countryCodes {
-            guard let countryName = (locale as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: countryCode) else {
-                continue
-            }
-            
-            guard let callingCode = callingCodes[countryCode] else {
-                continue
-            }
-            
-            let country = Country(name: countryName, isoCode: countryCode, callingCode: "+\(callingCode)")
-            
-            if country.isoCode == currentCountryCode {
-                currentCountries.append(country)
-            } else {
-                otherCountries.append(country)
+            if let country = Country.find(isoCode: countryCode, locale: locale) {
+                if country.isoCode == currentCountryCode {
+                    currentCountries.append(country)
+                } else {
+                    otherCountries.append(country)
+                }
             }
         }
         
@@ -61,7 +50,7 @@ class CountryDataSource {
     }
     
     func find(_ indexPath: IndexPath) -> Country {
-        return countries[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+        return countries[indexPath.section][indexPath.row]
     }
     
     func find(_ text: String) -> [Country] {

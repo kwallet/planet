@@ -20,6 +20,12 @@ class ViewController: UIViewController {
         // Try out showning a custom list of country codes by uncommenting the following line:
         // viewController.countryCodes = ["US", "IN"]
         
+        // Use Country like this:
+        if let country = Country.find(isoCode: "TR", locale: Locale(identifier: "tr_TR")) {
+            print("I found \(country.name)!")
+            // => Planet.Country(name: "Türkiye", isoCode: "TR", callingCode: "+90")
+        }
+        
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true, completion: nil)
     }

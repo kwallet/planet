@@ -67,6 +67,12 @@ public class CountryPickerViewController: UITableViewController {
         
         return tableFooterView
     }
+
+    deinit {
+        // workaround for http://www.openradar.me/22250107 which results in a warning like:
+        // [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x7fdecbe03580>)
+        searchController.loadViewIfNeeded()
+    }
 }
 
 // MARK: UIViewController

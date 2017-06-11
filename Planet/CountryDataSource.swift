@@ -23,7 +23,7 @@ class CountryDataSource {
         var currentCountries: [Country] = []
         var otherCountries: [Country] = []
         
-        let currentCountryCode = (locale as NSLocale).object(forKey: NSLocale.Key.countryCode) as! String
+        let currentCountryCode = Country.currentCountryCode(currentSystemLocale: Locale.current, formattingLocale: locale)
         
         for countryCode in countryCodes {
             if let country = Country.find(isoCode: countryCode, locale: locale) {

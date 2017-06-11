@@ -66,4 +66,11 @@ extension Country {
     public static func find(callingCode: String, locale: Locale = .current) -> Country? {
         return all(locale: locale).filter { $0.callingCode == callingCode } .first
     }
+
+    public static func currentCountryCode(currentSystemLocale: Locale = .current, formattingLocale: Locale = .current) -> String? {
+        if let countryCode = (currentSystemLocale as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String {
+            return countryCode
+        }
+        return (formattingLocale as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String
+    }
 }

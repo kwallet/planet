@@ -58,4 +58,19 @@ class PlanetTests: XCTestCase {
         
         XCTAssertNil(notIncludedCountry)
     }
+
+    func testDataSourceWithNonRegionalLocale() {
+        let locale = Locale(identifier: "en")
+        let dataSource = CountryDataSource(locale: locale, countryCodes: ["AT", "DE", "CH"])
+
+        XCTAssertEqual(dataSource.count(1), 3)
+
+        let includedCountry = dataSource.find("Austria").first
+
+        XCTAssertEqual(includedCountry?.isoCode, "AT")
+
+        let notIncludedCountry = dataSource.find("United States").first
+
+        XCTAssertNil(notIncludedCountry)
+    }
 }

@@ -27,4 +27,14 @@ class CountryTests: XCTestCase {
         XCTAssertEqual(country?.isoCode, "AT")
         XCTAssertEqual(country?.callingCode, "+43")
     }
+
+    func testAustriaInNonRegionalGerman() {
+        let locale = Locale(identifier: "de")
+        let country = Country.find(isoCode: "AT", locale: locale)
+
+        XCTAssertEqual(country?.name, "Österreich")
+        XCTAssertEqual(country?.isoCode, "AT")
+        XCTAssertEqual(country?.callingCode, "+43")
+    }
+
 }

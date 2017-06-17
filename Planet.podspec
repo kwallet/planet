@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Planet'
-  s.version      = '0.2.1'
+  s.version      = '0.3.1'
   s.summary      = 'A country picker'
   s.description  = 'A country picker view controller'
   s.homepage     = 'https://github.com/kwallet/planet'

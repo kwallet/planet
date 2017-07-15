@@ -46,7 +46,7 @@ public class CountryPickerViewController: UITableViewController {
     fileprivate var searchResults: [Country]?
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     
-    func findCountry(_ indexPath: IndexPath) -> Country {
+    open func findCountry(_ indexPath: IndexPath) -> Country {
         if let searchResults = searchResults {
             return searchResults[(indexPath as NSIndexPath).row]
         } else {
@@ -54,7 +54,7 @@ public class CountryPickerViewController: UITableViewController {
         }
     }
     
-    fileprivate dynamic func cancelButtonTapped(_ sender: UIBarButtonItem) {
+    open dynamic func cancelButtonTapped(_ sender: UIBarButtonItem) {
         delegate?.countryPickerViewControllerDidCancel(self)
     }
     

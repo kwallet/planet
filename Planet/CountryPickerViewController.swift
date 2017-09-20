@@ -44,9 +44,9 @@ public class CountryPickerViewController: UITableViewController {
     fileprivate var countryDataSource = CountryDataSource()
     
     fileprivate var searchResults: [Country]?
-    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    open let searchController = UISearchController(searchResultsController: nil)
     
-    fileprivate func findCountry(_ indexPath: IndexPath) -> Country {
+    open func findCountry(_ indexPath: IndexPath) -> Country {
         if let searchResults = searchResults {
             return searchResults[(indexPath as NSIndexPath).row]
         } else {
@@ -54,11 +54,11 @@ public class CountryPickerViewController: UITableViewController {
         }
     }
     
-    fileprivate dynamic func cancelButtonTapped(_ sender: UIBarButtonItem) {
+    open dynamic func cancelButtonTapped(_ sender: UIBarButtonItem) {
         delegate?.countryPickerViewControllerDidCancel(self)
     }
     
-    fileprivate func tableFooterView() -> UIView {
+    func tableFooterView() -> UIView {
         let tableFooterView = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 44.0))
         tableFooterView.text = NSLocalizedString("Icons by emojione.com", comment: "Icons by emojione.com")
         tableFooterView.textAlignment = .center

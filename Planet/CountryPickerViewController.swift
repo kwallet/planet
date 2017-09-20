@@ -44,7 +44,7 @@ public class CountryPickerViewController: UITableViewController {
     fileprivate var countryDataSource = CountryDataSource()
     
     fileprivate var searchResults: [Country]?
-    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    open let searchController = UISearchController(searchResultsController: nil)
     
     open func findCountry(_ indexPath: IndexPath) -> Country {
         if let searchResults = searchResults {
